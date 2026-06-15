@@ -184,6 +184,9 @@ main{
     border-radius: 12px;
     border: none;
 }
+#task-input input:focus{
+    outline: none;
+}
 
 #task-input button{
     display: flex;
@@ -194,11 +197,11 @@ main{
     background-color: #B0EC9C;
     border: none;
     border-radius: 10px;
-    padding: 4px 12px;
+    padding: 9px 12px;
 }
 #task-input button i{
     color: #283F3E;
-    font-size: 2.5vw;
+    font-size: 2vw;
 }
 #task{
     width: 100%;
@@ -216,4 +219,51 @@ main{
     height: 15%;
     background-color: #B0EC9C;
     border-radius: 12px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 5px 20px ;
+
+}
+
+.task-desc{
+    width: 60%;
+    height: 70%;
+    background-color: #283F3E;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.task-checkbox{
+    padding: 10px;
+}
+
+.task-status{
+    padding: 10px 15px;
+    font-size: 1.1vw;
+    background-color: #283F3E;
+    color: #B0EC9C;
+    border-radius: 5px;
+    border: none;
+}
+
+.delete-btn{
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #283F3E;
+}
+.delete-btn i{
+    color: #B0EC9C;
+    font-size: 1.2vw;
+}
+
+
+.edit-btn{
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #283F3E;
+}
+.edit-btn i{
+   color: #B0EC9C;
+    font-size: 1.2vw;
 }

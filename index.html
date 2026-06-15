@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To Do List</title>
+    <title>Shery Task</title>
+    <link rel="icon" href="assets/logo (2).png" type="image/png" />
     <link rel="stylesheet" href="style.css" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet"
     />
@@ -51,6 +52,17 @@
 
             <div id="task">
               <div class="tasks">
+                <button class="task-checkbox" type="radio"></button>
+                <div class="task-desc">
+                </div>
+                <select class="task-status">
+                  <option selected disabled>Select Status</option>
+                  <option value="upcoming">Upcoming</option>
+                  <option value="in-progress">In Progress</option>
+                  <option value="completed">Completed</option>
+                </select>
+                <div class="edit-btn"><i class="ri-pencil-ai-line"></i></div>
+                <div class="delete-btn"><i class="ri-delete-bin-6-line"></i></div>
                 
               </div>
               <div class="tasks"></div>
