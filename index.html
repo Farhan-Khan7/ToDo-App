@@ -5,18 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do List</title>
     <link rel="stylesheet" href="style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet"
+    />
   </head>
   <body>
     <div id="container">
       <main>
         <div id="sidebar">
-            <div id="app-name">
-                <h1>Task Nova</h1>
-                <p id="current-date"></p>
+          <div id="app-name">
+            <h1><img src="assets/logo (2).png" alt="">Shery Task</h1>
+            <p id="current-date"></p>
+          </div>
+          <div id="status-section">
+            <div id="total-task" >
+              <div id="task-left">
+                <p><span id="task-count">0</span> Tasks Left</p>
+                <p><span id="task-percentage">0</span> Done</p>
+              </div>
+              <div class="task-loading">
+                <div class="inside-task-loader"></div>
+              </div>
             </div>
-            <div id="status-section"></div>
+            <div class="status">
+              <i class="ri-calendar-schedule-line"></i>Upcoming Task
+            </div>
+            <div class="status">
+              <i class="ri-hourglass-fill"></i>In progress Task
+            </div>
+            <div class="status">
+              <i class="ri-check-double-fill"></i>Completed Task
+            </div>
+
+            <div class="quote">
+              <h3>Daily Quote :<i class="ri-loop-right-ai-line"></i></h3>
+              <p>Don't Be The Crowd Be For The Crowd .</p>
+              <span>Farhan khan</span>
+            </div>
+          </div>
         </div>
-        <div id="right-section"></div>
+        <div id="right-section">
+            <div id="task-input">
+              <input type="text" placeholder="Add a new task...">
+              <button><i class="ri-add-circle-line"></i></button>
+            </div>
+
+            <div id="task">
+              <div class="tasks">
+                
+              </div>
+              <div class="tasks"></div>
+              <div class="tasks"></div>
+              <div class="tasks"></div>
+              <div class="tasks"></div>
+            </div>
+        </div>
       </main>
     </div>
 
