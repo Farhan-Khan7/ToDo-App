@@ -16,7 +16,7 @@ main {
 }
 
 .overlay {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.484);
@@ -36,7 +36,11 @@ main {
     /* flex-direction: column; */
     align-items: center;
     background: linear-gradient(to right, #affde4, #affde4, #ffffff);
+    transition: cubic-bezier(0.19, 1, 0.22, 1) 2s;
     /* display: none; */
+    position: absolute;
+    top: 2%;
+
 }
 
 #signup-page-left {
@@ -123,7 +127,7 @@ main {
 #signup-btn {
     /* position: absolute; */
     /* bottom: 3%; */
-    margin-top: 4%;
+    margin-top: 10%;
     background: linear-gradient(to bottom right, #affde4, #ffffff, #affde4);
     border: 1px solid #2d4bff;
     padding: 2% 7%;
@@ -147,11 +151,21 @@ main {
     border: 1px solid #2d4bff;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
     /* background-color: yellow; */
 }
-
 #signup-page-right img {
     width: 50px;
+}
+#signup-page-right p{
+    position: absolute;
+    bottom: 5%;
+}
+#signup-page-right p span{
+    color: #2d4bff;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .pfp-error{
@@ -201,7 +215,10 @@ main {
     /* flex-direction: column; */
     align-items: center;
     background: linear-gradient(to right, #affde4, #affde4, #ffffff);
-    display: none;
+    /* display: none; */
+    transition: cubic-bezier(0.19, 1, 0.22, 1) 2s;
+    position: absolute;
+    top: -100%;
 }
 
 #login-page-left{
@@ -217,6 +234,16 @@ main {
     border: 1px solid #2d4bff;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+}
+#login-page-left p{
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    bottom: 15%;
+}
+#login-page-left p span{
+    color: #2d4bff;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 
@@ -253,10 +280,10 @@ main {
     /* background-color: #2D4BFF; */
     margin-top: 40px;
     width: 100%;
-    width: 25vw;
+    width: 27vw;
     display: flex;
     justify-content: space-between;
-    padding: 0% 11% 0% 10%;
+    padding: 0% 17% 0% 10%;
     align-items: center;
     font-weight: bold;
     font-size: 1.2vw;
@@ -290,9 +317,9 @@ main {
 }
 
 #login-page .errors{
-    width: 15vw;
+    width: 17vw;
     /* background-color: yellow; */
-    margin-left: 50%;
+    margin-left: 55%;
     display: flex;
     flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;

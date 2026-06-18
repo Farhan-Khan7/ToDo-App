@@ -27,13 +27,10 @@ setInterval(() => {
 
 
 const overlay = document.querySelector(".overlay");
-const signPage = document.querySelector("#signup-page");
 const form = document.querySelector("form");
 
-const confirmPassword = document.querySelector("#confirm-password")
 
 
-const signupbtn = document.querySelector("#signup-btn")
 
 
 const fullName = document.querySelector("#fullname")
@@ -42,9 +39,8 @@ const nameConditionError = document.querySelector(".name-condition-error");
 const nameVerifyError = document.querySelector(".name-verify");
 
 
-fullName.addEventListener("input" , function(){
+fullName.addEventListener("input", function () {
     const nameRegex = /^[A-Za-z ]+$/;
-    
     const name = fullName.value.trim();
     
     if (name === "") {
@@ -52,17 +48,17 @@ fullName.addEventListener("input" , function(){
         nameConditionError.style.display = "none"
         nameVerifyError.style.display = "none"
         name.style.borderColor = "red"
-    }else if(name.length < 2) {
+    } else if (name.length < 2) {
         nameConditionError.style.display = "flex"
         name.style.borderColor = "red"
-    }else if(!nameRegex.test(name)) {
+    } else if (!nameRegex.test(name)) {
         nameVerifyError.style.display = "flex"
         name.style.borderColor = "red"
-    }else {
+    } else {
         nameRequiredError.style.display = "none";
         nameConditionError.style.display = "none";
         nameVerifyError.style.display = "none";
-        name.style.borderColor = "green"
+        fullName.style.borderColor = "green"
     }
 })
 
@@ -73,20 +69,21 @@ const emailRequiredError = document.querySelector(".email-required-error");
 const emailConditionError = document.querySelector(".email-condition-error");
 const emailVerifyError = document.querySelector(".email-verify");
 
-email.addEventListener("input", function(){
+email.addEventListener("input", function () {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
     const emailValue = email.value.trim()
-    if(emailValue === ""){
+    if (emailValue === "") {
         emailRequiredError.style.display = "flex"
-         emailConditionError.style.display = "none"
-         emailVerifyError.style.display = "none"
+        emailConditionError.style.display = "none"
+        emailVerifyError.style.display = "none"
         email.style.borderColor = "red"
-    }else if(emailValue.includes(" ")){
+    } else if (emailValue.includes(" ")) {
+        emailConditionError.style.display = "flex"
         email.style.borderColor = "red"
-    }else if(!emailRegex.test(emailValue)){
+    } else if (!emailRegex.test(emailValue)) {
         emailVerifyError.style.display = "flex"
         email.style.borderColor = "red"
-    }else{
+    } else {
         emailRequiredError.style.display = "none";
         emailConditionError.style.display = "none";
         emailVerifyError.style.display = "none";
@@ -104,17 +101,18 @@ const passwordConditionError = document.querySelector(".password-condition-error
 const passwordVerifyError = document.querySelector(".password-verify");
 
 password.addEventListener("input", function () {
-
+    
     const passwordValue = password.value.trim();
-
+    
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
-
+    
     if (passwordValue === "") {
         passwordRequiredError.style.display = "flex";
         passwordConditionError.style.display = "none";
         passwordVerifyError.style.display = "none";
         password.style.borderColor = "red";
     } else if (passwordValue.length < 8) {
+        passwordRequiredError.style.display = "none";
         passwordConditionError.style.display = "flex";
         password.style.borderColor = "red";
     } else if (!passwordRegex.test(passwordValue)) {
@@ -126,60 +124,289 @@ password.addEventListener("input", function () {
         passwordVerifyError.style.display = "none";
         password.style.borderColor = "green";
     }
-
+    
 });
 
 
+// Password Input Verification done
 
 
+const confirmPassword = document.querySelector("#confirm-password")
+const confirmPasswordRequiredError = document.querySelector(".confirm-pass-required-error");
+const confirmPasswordConditionError = document.querySelector(".confirm-password-condition-error");
 
+confirmPassword.addEventListener("input", function () {
+    const confirmPasswordValue = confirmPassword.value.trim();
+    const passwordValue = password.value.trim();
+    
+    if (confirmPasswordValue === "") {
+        confirmPasswordRequiredError.style.display = "flex";
+        confirmPasswordConditionError.style.display = "none";
+        confirmPassword.style.borderColor = "red";
+    } else if (confirmPasswordValue !== passwordValue) {
+        confirmPasswordConditionError.style.display = "flex";
+        confirmPassword.style.borderColor = "red";
+    } else {
+        confirmPasswordRequiredError.style.display = "none";
+        confirmPasswordConditionError.style.display = "none";
+        confirmPassword.style.borderColor = "green";
+    }
+})
+
+
+const signupbtn = document.querySelector("#signup-btn")
+const signupPage = document.querySelector("#signup-page");
 
 
 signupbtn.addEventListener("click", function (eventdets) {
     eventdets.preventDefault();
+    
+    
+    let isvalid = true;
+    const nameRegex = /^[A-Za-z ]+$/;
+    const name = fullName.value.trim();
+    
+    nameRequiredError.style.display = "none";
+    nameConditionError.style.display = "none";
+    nameVerifyError.style.display = "none";
+    
+    if (name === "") {
+        nameRequiredError.style.display = "flex"
+        fullName.style.borderColor = "red"
+        isvalid = false;
+    } else if (name.length < 2) {
+        nameConditionError.style.display = "flex"
+        fullName.style.borderColor = "red"
+        isvalid = false;
+    } else if (!nameRegex.test(name)) {
+        nameVerifyError.style.display = "flex"
+        fullName.style.borderColor = "red"
+        isvalid = false;
+    } else {
+        fullName.style.borderColor = "green"
+    }
+    
+    
+    // full name validation done
+    
+    
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    const emailValue = email.value.trim()
+    
+    emailRequiredError.style.display = "none";
+    emailConditionError.style.display = "none";
+    emailVerifyError.style.display = "none";
 
-   
+    if (emailValue === "") {
+        emailRequiredError.style.display = "flex"
+        email.style.borderColor = "red"
+        isvalid = false;
+    } else if (emailValue.includes(" ")) {
+        emailConditionError.style.display = "none";
+        email.style.borderColor = "red"
+        isvalid = false;
+    } else if (!emailRegex.test(emailValue)) {
+        emailVerifyError.style.display = "flex"
+        email.style.borderColor = "red"
+        isvalid = false;
+    } else {
+        email.style.borderColor = "green"
+    }
+    
+    // email validation done
+    
+    const passwordValue = password.value.trim();
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    
+    passwordRequiredError.style.display = "none";
+    passwordConditionError.style.display = "none";
+    passwordVerifyError.style.display = "none";
+    
+    if (passwordValue === "") {
+        passwordRequiredError.style.display = "flex";
+        password.style.borderColor = "red";
+        isvalid = false;
+    } else if (passwordValue.length < 8) {
+        passwordConditionError.style.display = "flex";
+        password.style.borderColor = "red";
+        isvalid = false;
+    } else if (!passwordRegex.test(passwordValue)) {
+        passwordVerifyError.style.display = "flex";
+        password.style.borderColor = "red";
+        isvalid = false;
+    } else {
+        password.style.borderColor = "green";
+    }
+    
+    // password validation done
+    
+    const confirmPasswordValue = confirmPassword.value.trim();
+    // const passwordValue = password.value.trim();
+    
+    confirmPasswordRequiredError.style.display = "none";
+    confirmPasswordConditionError.style.display = "none";
+    
+    if (confirmPasswordValue === "") {
+        confirmPasswordRequiredError.style.display = "flex";
+        confirmPassword.style.borderColor = "red";
+        isvalid = false;
+    } else if (confirmPasswordValue !== passwordValue) {
+        confirmPasswordConditionError.style.display = "flex";
+        confirmPassword.style.borderColor = "red";
+        isvalid = false;
+    } else {
+        confirmPassword.style.borderColor = "green";
+    }
+    
+    // confirm password validation done
+    
+    if (!isvalid) {
+        return;
+    } else {
+        const userInfo = {
+            fullName: name,
+            email: emailValue,
+            password: passwordValue
+        }
+        
+        localStorage.setItem("user", JSON.stringify(userInfo));
+        
+    }
+    
+    signupPage.style.top = "100%";
+    loginPage.style.top = "5%";
+    signupPage.style.display = "none";
+    
+})
 
 
+const loginEmail = document.querySelector("#loginEmail");
+
+const loginEmailRequiredErrors = document.querySelector("#login-email-required-error");
+const loginEmailConditionErrors = document.querySelector("#login-email-condition-error");
+const loginEmailErrors = document.querySelector("#login-email-error");
+
+loginEmail.addEventListener("input", function () {
+    const userData = JSON.parse(localStorage.getItem("user"))
+    
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    const emailValue = loginEmail.value.trim();
+    
+    loginEmailRequiredErrors.style.display = "none"
+    loginEmailConditionErrors.style.display = "none"
+    loginEmailErrors.style.display = "none"
+    
+    
+    if(emailValue === "") {
+        loginEmailRequiredErrors.style.display = "flex"
+        loginEmail.style.borderColor = "red"
+    }else if(!emailRegex.test(emailValue)){
+        loginEmailConditionErrors.style.display = "flex"
+        loginEmail.style.borderColor = "red"
+    }else if(userData.email !== emailValue){
+        loginEmailErrors.style.display = "flex"
+        loginEmail.style.borderColor = "red"
+    }else{
+        loginEmail.style.borderColor = "green"
+    }
+    
+    
+})
+
+// login email input verification done
+const loginPassword = document.querySelector("#loginPassword");
+
+const loginpasswordRequiredErrors = document.querySelector("#login-password-required-error");
+const loginPasswordConditionErrors = document.querySelector("#login-password-condition-error");
+const loginPasswordErrors = document.querySelector("#login-password-error");
 
 
+loginPassword.addEventListener("input", function () {
+    const userData = JSON.parse(localStorage.getItem("user"))
+    
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordValue = loginPassword.value.trim();
+    
+    loginpasswordRequiredErrors.style.display = "none"
+    loginPasswordConditionErrors.style.display = "none"
+    loginPasswordErrors.style.display = "none"
+    
+    if(passwordValue === ""){
+        loginpasswordRequiredErrors.style.display = "flex"
+        loginPassword.style.borderColor = "red"
+    }else if(userData.password !== passwordValue){
+        loginPasswordErrors.style.display = "flex"
+        loginPassword.style.borderColor = "red"
+    }else{
+        loginPassword.style.borderColor = "green"
+    }
+    
+})
+// login password input verification done
 
 
+const loginPage = document.querySelector("#login-page");
+const loginbtn = document.querySelector("#login-btn")
 
 
+loginbtn.addEventListener("click", function (eventdets) {
+    eventdets.preventDefault();
+    let isvalid = true;
+
+    const userData = JSON.parse(localStorage.getItem("user"))
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    const emailValue = loginEmail.value.trim();
+    
+    loginEmailRequiredErrors.style.display = "none"
+    loginEmailConditionErrors.style.display = "none"
+    loginEmailErrors.style.display = "none"
 
 
-
-
-
-
-
-    const userInfo = {
-        fullName,
-        email,
-        password,
-        confirmPassword
+    if(emailValue === "") {
+        loginEmailRequiredErrors.style.display = "flex"
+        loginEmail.style.borderColor = "red"
+        isvalid = false;
+    }else if(!emailRegex.test(emailValue)){
+        loginEmailConditionErrors.style.display = "flex"
+        loginEmail.style.borderColor = "red"
+        isvalid = false;
+    }else if(userData.email !== emailValue){
+        loginEmailErrors.style.display = "flex"
+        loginEmail.style.borderColor = "red"
+        isvalid = false;
+    }else{
+        loginEmail.style.borderColor = "green"
     }
 
+    // login email input verification done
 
 
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordValue = loginPassword.value.trim();
+    
+    loginpasswordRequiredErrors.style.display = "none"
+    loginPasswordConditionErrors.style.display = "none"
+    loginPasswordErrors.style.display = "none"
 
+    if(passwordValue === ""){
+        loginpasswordRequiredErrors.style.display = "flex"
+        loginPassword.style.borderColor = "red"
+        isvalid = false;
+    }else if(userData.password !== passwordValue){
+        loginPasswordErrors.style.display = "flex"
+        loginPassword.style.borderColor = "red"
+        isvalid = false;
+    }else{
+        loginPassword.style.borderColor = "green"
+    }
 
+    if(isvalid){
+        loginPage.style.top = "105%";
+        setTimeout(() => {
+            loginPage.style.display = "none";
+            overlay.style.display = "none";
+        }, 2000)
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    console.log(userInfo.fullName.value)
-    console.log(userInfo.email.value)
-    console.log(userInfo.password.value)
-    console.log(userInfo.confirmPassword.value)
 })
