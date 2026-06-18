@@ -9,6 +9,67 @@ body {
     width: 100%;
     height: 100%;
 }
+:root{
+
+    /* Light Theme */
+
+    --primary-color: #2D4BFF;
+    --secondary-color: #AFFDE4;
+
+    --text-color: #2D4BFF;
+    --heading-color: #1A1A1A;
+
+    --bg-color: #FFFFFF;
+    --card-bg-color: #F8FFFD;
+
+    --gradient:
+        linear-gradient(
+            to right,
+            #AFFDE4,
+            #AFFDE4
+        );
+    
+     --gradient-hero:
+        linear-gradient(
+            to right bottom,
+            #AFFDE4,
+            #AFFDE4,
+            #FFFFFF
+        );
+
+    --border-color: #2D4BFF;
+
+    --success-color: #22C55E;
+    --error-color: #EF4444;
+}
+
+.dark-mode{
+
+    /* Dark Theme */
+
+    --primary-color: aqua;
+    --secondary-color: #5A5858;
+
+    --text-color: aqua;
+    --heading-color: #FFFFFF;
+
+    --bg-color: #000000;
+    --card-bg-color: #1A1A1A;
+
+    --gradient:
+        linear-gradient(
+            to right,
+            black,
+            #5A5858,
+            black
+        );
+
+    --border-color: aqua;
+
+    --success-color: #22C55E;
+    --error-color: #EF4444;
+}
+
 
 main {
     max-width: 1600px;
@@ -24,7 +85,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* display: none; */
+    display: none;
 }
 
 #signup-page {
@@ -355,7 +416,7 @@ nav {
     position: fixed;
     width: 100%;
     height: 10vh;
-    background: linear-gradient(to right, #affde4, #affde4c2, #ffffff);
+    background: var(--gradient);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -365,18 +426,43 @@ nav {
 
 nav img {
     width: 12%;
+    /* display: none; */
 }
 
-.user-profile {
-    width: 40%;
-    height: 7vh;
+.dark-mode img{
+    width: 13%;
+}
+nav #dark-mode-logo{
+    display: none;
+}
+
+.dark-light-toggle {
+    width: 6vh;
+    height: 6vh;
+    background-color: transparent;
     /* background-color: yellow; */
+    border: 1px solid #5a5858;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10%;
     font-family: Arial, Helvetica, sans-serif;
     position: relative;
+    cursor: pointer;
+}
+
+#dark-mode-toggle{
+    position: absolute;
+    color: var(--heading-color);
+    font-size: 1.3vw;
+    display: none;
+}
+#light-mode-toggle{
+    position: absolute;
+    color: var(--heading-color);
+    font-size: 1.3vw;
+    /* display: none; */
 }
 
 /* Navbaar section Completed */
@@ -393,7 +479,8 @@ nav img {
     gap: 40px;
     text-align: center;
     /* background-color: white; */
-    background: linear-gradient(to bottom right, #affde4, #ffffff);
+    background: var(--gradient);
+    /* background: linear-gradient(to right, black , #5a5858, black); */
     overflow: hidden;
     /* z-index: -1; */
     /* base layer */
@@ -421,6 +508,8 @@ nav img {
     text-align: center;
     width: 55%;
     height: auto;
+    color: var(--heading-color);
+    /* color: white; */
     /* background-color: yellow; */
 }
 
@@ -431,7 +520,8 @@ nav img {
 
 #changing-text {
     display: inline-block;
-    color: #2d4bff;
+    color: var(--primary-color);
+    /* color: aqua; */
     animation: dropIn 0.6s ease;
 }
 
@@ -452,6 +542,8 @@ nav img {
     display: flex;
     justify-content: space-between;
     height: auto;
+    color: var(--heading-color);
+    /* color: white; */
     /* background-color: yellow; */
 }
 
@@ -462,29 +554,39 @@ nav img {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 #feature-highlights span i{
-    color: #2d4bff;
-}
-#project-status {
-    width: 15%;
-    top: 25%;
-    left: 5%;
-    position: absolute;
+    color: var(--primary-color);
+    /* color: aqua; */
 }
 
-#task-progress {
-    width: 13%;
-    top: 70%;
-    right: 4%;
+
+#light-project-status {
+    width: 20%;
+    top: 18%;
+    left: 3%;
     position: absolute;
+    /* display: none; */
+    /* background-color: #affde43f; */
+}
+
+#light-task-progress {
+    width: 25%;
+    top: 70%;
+    right: 0%;
+    position: absolute;
+    /* display: none; */
+    /* background-color: #affde43f; */
 }
 
 #get-start {
     position: absolute;
     top: 80%;
     /* margin-top: 5%; */
-    background: linear-gradient(to bottom right, #affde4, #ffffff, #affde4);
-    border: 1px solid #2d4bff;
-    color: #2d4bff;
+    background: var(--gradient);
+    /* background: linear-gradient(to bottom right, black , #5a5858, black); */
+    border: 1px solid var(--border-color);
+    /* border: 1px solid #5a5858; */
+    color: var(--text-color);
+    /* color: aqua; */
     padding: 0.8% 2%;
     font-size: 1.3vw;
     font-family: Arial, Helvetica, sans-serif;
