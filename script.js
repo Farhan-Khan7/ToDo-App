@@ -927,7 +927,7 @@ const refreshBtn = document.querySelector(".ri-loop-right-ai-line");
 function showRandomQuote() {
 
 
-    const quoteIndex = Math.floor(Math.random() * quotes.length)
+    const quoteIndex = Math.floor(Math.random() * quotes.length + 1)
 
     refreshBtn.classList.add("rotate")
 
