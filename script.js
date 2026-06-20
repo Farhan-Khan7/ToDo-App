@@ -325,6 +325,21 @@ signupbtn.addEventListener("click", function (eventdets) {
 
 })
 
+const signUp = document.querySelector("#signup");
+const login = document.querySelector("#login");
+
+
+
+login.addEventListener("click", function(){
+    // loginPage.style.top = "105%";
+    loginPage.style.top = "5%";
+    signupPage.style.top = "-100%";
+})
+
+signUp.addEventListener("click", function(){
+    loginPage.style.top = "-100%";
+    signupPage.style.top = "2%";
+})
 
 const loginEmail = document.querySelector("#loginEmail");
 
@@ -458,6 +473,8 @@ loginbtn.addEventListener("click", function (eventdets) {
 })
 
 
+
+
 // All Front Page UI Done
 
 
@@ -484,7 +501,7 @@ navLinks.forEach((element, id) => {
         } else if (event.target.id === "completedTasks") {
             heroSection.style.display = "none";
             completedTasksPage.style.display = "flex";
-        } else if (event.target.id === "dashboard") {
+        } else if (event.target.id === "workflow") {
             heroSection.style.display = "none";
             workflowPage.style.display = "flex";
         }
@@ -544,9 +561,56 @@ renderTasks()
 // task UI render ho raha hai 
 
 
+const totalTaskCount = document.querySelector("#total-task-count");
+const completedTaskCount = document.querySelector("#completed-task-count")
+const pendingTaskCount = document.querySelector("#pending-task-count")
+
+function renderDashboard() {
+
+    const tasks =
+        JSON.parse(localStorage.getItem("tasks")) || [];
+
+    const totalTasks =
+        tasks.length;
+
+    const completedTasks =
+        tasks.filter(task => task.completed).length;
+
+    totalTaskCount.textContent =
+        totalTasks;
+
+    completedTaskCount.textContent =
+        completedTasks;
+
+    pendingTaskCount.textContent =
+        totalTasks - completedTasks;
+}
+renderDashboard()
+
+
+// Dashborad and task count UI render 
+
+const taskError = document.querySelector(".task-error");
+const priorityError = document.querySelector(".priority-error");
+const categoryError = document.querySelector(".category-error");
 
 taskAddBtn.addEventListener("click", function (details) {
     details.preventDefault()
+
+    taskError.textContent = "";
+    priorityError.textContent = "";
+    categoryError.textContent = "";
+
+    if (newTask.value.trim() === "") {
+        taskError.textContent = "Please enter a task.";
+        return;
+    }else if(taskPriority.value === "") {
+        priorityError.textContent = "Please select a priority.";
+        return;
+    }else if (taskTag.value === "") {
+        categoryError.textContent = "Please select a category.";
+        return;
+    }
 
     let taskdetails = {
         id: Date.now(),
@@ -563,8 +627,9 @@ taskAddBtn.addEventListener("click", function (details) {
 
 
     renderTasks()
+    renderDashboard()
 
-
+    addTaskForm.reset()
 })
 
 
@@ -572,18 +637,18 @@ taskAddBtn.addEventListener("click", function (details) {
 
 
 
-const completedTashShow = document.querySelector("#complete-task")
+const completedTaskShow = document.querySelector("#complete-task")
 
 function completedrenderTasks() {
 
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-    taskShowSection.innerHTML = "";
+    completedTaskShow.innerHTML = "";
 
     tasks.forEach(function (task) {
 
-        if(task.completed){
-            completedTashShow.innerHTML += `
+        if (task.completed) {
+            completedTaskShow.innerHTML += `
             <div id="tasks" data-id="${task.id}">
                 <div class="task">
                     <div class="content">
@@ -613,9 +678,14 @@ function completedrenderTasks() {
 
 completedrenderTasks()
 
+// task completed button code done 
 
-// complete button code done 
 
+
+
+
+// yaha per event delegation lag raha hai parent ka listner 
+// child per jaa raha hai 
 taskShowSection.addEventListener("click", function (details) {
 
 
@@ -662,12 +732,30 @@ taskShowSection.addEventListener("click", function (details) {
 
         renderTasks();
         completedrenderTasks()
+        renderDashboard()
 
+    } else if (details.target.closest(".delete")) {
+        const taskList = details.target.closest("#tasks");
+        const taskId = Number(taskList.dataset.id);
+
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+        const updateTask = tasks.filter(function (task) {
+            return task.id !== taskId
+        })
+
+        localStorage.setItem("tasks", JSON.stringify(updateTask))
+
+        renderTasks();
+        completedrenderTasks()
+        renderDashboard()
     }
 
 })
 
 
+
+// after completed task update renederTask UI again
 function renderTasks() {
 
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -676,7 +764,7 @@ function renderTasks() {
 
     tasks.forEach(function (task) {
 
-        if(!task.completed){
+        if (!task.completed) {
             taskShowSection.innerHTML += `
             <div id="tasks" data-id="${task.id}">
                 <div class="task">
@@ -710,3 +798,143 @@ function renderTasks() {
 renderTasks()
 
 
+completedTaskShow.addEventListener("click", function (details) {
+
+    if (details.target.closest(".delete")) {
+
+        const taskList =
+            details.target.closest("#tasks");
+
+        const taskId =
+            Number(taskList.dataset.id);
+
+        const tasks =
+            JSON.parse(localStorage.getItem("tasks")) || [];
+
+        const updatedTasks =
+            tasks.filter(function (task) {
+
+                return task.id !== taskId;
+
+            });
+
+        localStorage.setItem(
+            "tasks",
+            JSON.stringify(updatedTasks)
+        );
+
+        renderTasks();
+        completedrenderTasks();
+        renderDashboard()
+
+    }
+
+});
+
+
+// Finallly done all todo button functionlty
+
+
+const quotes = [
+    {
+        quote: "Success is built in silence long before it is seen in public.",
+        author: "Naval Ravikant"
+    },
+    {
+        quote: "The person who can stay focused while others are distracted will own the future.",
+        author: "James Clear"
+    },
+    {
+        quote: "Discipline is choosing between what you want now and what you want most.",
+        author: "Abraham Lincoln"
+    },
+    {
+        quote: "Your comfort zone is the most expensive place to live.",
+        author: "Alex Hormozi"
+    },
+    {
+        quote: "Small daily improvements create extraordinary results over time.",
+        author: "Robin Sharma"
+    },
+    {
+        quote: "The hardest worker in the room eventually becomes the most valuable.",
+        author: "Patrick Bet-David"
+    },
+    {
+        quote: "Talent opens the door, consistency keeps it open.",
+        author: "Angela Duckworth"
+    },
+    {
+        quote: "The future rewards those who can delay gratification today.",
+        author: "Morgan Housel"
+    },
+    {
+        quote: "Most people quit when they are one breakthrough away from success.",
+        author: "Les Brown"
+    },
+    {
+        quote: "Your habits are the architects of your destiny.",
+        author: "James Clear"
+    },
+    {
+        quote: "Dreams become reality only when action becomes a daily ritual.",
+        author: "Denzel Washington"
+    },
+    {
+        quote: "You do not rise to your goals, you fall to your systems.",
+        author: "James Clear"
+    },
+    {
+        quote: "Every expert was once a beginner who refused to quit.",
+        author: "Helen Hayes"
+    },
+    {
+        quote: "A year from now you will wish you had started today.",
+        author: "Karen Lamb"
+    },
+    {
+        quote: "Focus is a superpower in a world designed to distract you.",
+        author: "Cal Newport"
+    },
+    {
+        quote: "Your current situation is not your final destination.",
+        author: "Nido Qubein"
+    },
+    {
+        quote: "What feels impossible today becomes your warm-up tomorrow.",
+        author: "David Goggins"
+    },
+    {
+        quote: "The quality of your future depends on what you repeatedly do today.",
+        author: "Brian Tracy"
+    },
+    {
+        quote: "Internal growth always appears before external success.",
+        author: "Farhan Khan"
+    },
+    {
+        quote: "My Internal Wealth Will Definitely Create My External Wealth...",
+        author: "Farhan Khan"
+    }
+];
+
+
+const quoteText = document.querySelector("#quote");
+const quoteAuthor = document.querySelector("#author");
+const refreshBtn = document.querySelector(".ri-loop-right-ai-line");
+
+
+function showRandomQuote() {
+
+
+    const quoteIndex = Math.floor(Math.random() * quotes.length)
+
+    refreshBtn.classList.add("rotate")
+
+    quoteText.textContent = quotes[quoteIndex].quote;
+    quoteAuthor.textContent = quotes[quoteIndex].author;
+}
+
+showRandomQuote()
+
+refreshBtn.addEventListener("click", showRandomQuote)
