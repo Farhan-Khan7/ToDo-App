@@ -503,7 +503,7 @@ nav #dark-mode-logo {
 #hero {
   position: relative;
   min-height: 100vh;
-  width: 100%;
+  min-width: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
